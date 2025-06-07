@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.appbar.MaterialToolbar;
 
 public class IssueTicketActivity extends AppCompatActivity {
 
@@ -23,6 +24,14 @@ public class IssueTicketActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_issue_ticket);
+
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Issue Traffic Ticket");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         editTextOffenseType = findViewById(R.id.editTextOffenseType);
         editTextLocation = findViewById(R.id.editTextLocation);
@@ -74,5 +83,11 @@ public class IssueTicketActivity extends AppCompatActivity {
         editTextNotes.setText("");
         editTextAmount.setText("");
         editTextOffenseType.requestFocus(); // Set focus to the first field
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

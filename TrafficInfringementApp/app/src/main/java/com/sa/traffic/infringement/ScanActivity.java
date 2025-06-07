@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import android.content.Intent;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.sa.traffic.infringement.models.Driver;
@@ -32,6 +33,14 @@ public class ScanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
+
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Scan Document");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         buttonLaunchScanner = findViewById(R.id.buttonLaunchScanner);
         textViewScanPrompt = findViewById(R.id.textViewScanPrompt);
@@ -162,5 +171,11 @@ public class ScanActivity extends AppCompatActivity {
         if (parts.length >= 4) vehicle.setOwnerName(parts[3].trim()); else vehicle.setOwnerName("N/A");
         if (parts.length >= 5) vehicle.setStatus(parts[4].trim()); else vehicle.setStatus("Unknown");
         return vehicle;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

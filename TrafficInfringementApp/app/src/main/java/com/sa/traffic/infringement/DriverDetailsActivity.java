@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.sa.traffic.infringement.models.Driver;
 import com.sa.traffic.infringement.models.Offense;
 import java.util.List;
@@ -22,6 +23,14 @@ public class DriverDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_details);
+
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Driver Details");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         textViewDriverName = findViewById(R.id.textViewDriverName);
         textViewDriverId = findViewById(R.id.textViewDriverId);
@@ -65,5 +74,11 @@ public class DriverDetailsActivity extends AppCompatActivity {
         textViewDriverId.setText("No data received");
         textViewDriverContact.setText("No data received");
         textViewDriverOffenses.setText("No data received");
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
