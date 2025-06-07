@@ -15,8 +15,7 @@ It allows officers to:
 *   Basic UI styling and navigation
 
 ## Credits
-*   Developed by AI.
-*   Inspired by/User Request: Tony
+*    Tony
 
 ## Future Development
 *   Integration with actual barcode/QR code scanning libraries.
