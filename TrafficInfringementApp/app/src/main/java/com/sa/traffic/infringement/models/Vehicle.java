@@ -1,6 +1,9 @@
 package com.sa.traffic.infringement.models;
 
-public class Vehicle {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Vehicle implements Parcelable {
     private String make;
     private String model;
     private String registrationNumber;
@@ -14,6 +17,30 @@ public class Vehicle {
         this.ownerName = ownerName;
         this.status = status;
     }
+
+    // Default constructor
+    public Vehicle() {
+    }
+
+    protected Vehicle(Parcel in) {
+        make = in.readString();
+        model = in.readString();
+        registrationNumber = in.readString();
+        ownerName = in.readString();
+        status = in.readString();
+    }
+
+    public static final Creator<Vehicle> CREATOR = new Creator<Vehicle>() {
+        @Override
+        public Vehicle createFromParcel(Parcel in) {
+            return new Vehicle(in);
+        }
+
+        @Override
+        public Vehicle[] newArray(int size) {
+            return new Vehicle[size];
+        }
+    };
 
     public String getMake() {
         return make;
@@ -53,5 +80,19 @@ public class Vehicle {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(make);
+        dest.writeString(model);
+        dest.writeString(registrationNumber);
+        dest.writeString(ownerName);
+        dest.writeString(status);
     }
 }

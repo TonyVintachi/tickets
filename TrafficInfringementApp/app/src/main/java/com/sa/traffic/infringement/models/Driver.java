@@ -1,9 +1,11 @@
 package com.sa.traffic.infringement.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Driver {
+public class Driver implements Parcelable {
     private String name;
     private String idNumber;
     private String contact;
@@ -15,6 +17,31 @@ public class Driver {
         this.contact = contact;
         this.offenses = new ArrayList<>(); // Initialize with an empty list
     }
+
+    // Default constructor for use with Parcelable or if no initial data
+    public Driver() {
+        this.offenses = new ArrayList<>();
+    }
+
+
+    protected Driver(Parcel in) {
+        name = in.readString();
+        idNumber = in.readString();
+        contact = in.readString();
+        offenses = in.createTypedArrayList(Offense.CREATOR);
+    }
+
+    public static final Creator<Driver> CREATOR = new Creator<Driver>() {
+        @Override
+        public Driver createFromParcel(Parcel in) {
+            return new Driver(in);
+        }
+
+        @Override
+        public Driver[] newArray(int size) {
+            return new Driver[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -54,5 +81,18 @@ public class Driver {
             this.offenses = new ArrayList<>();
         }
         this.offenses.add(offense);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(idNumber);
+        dest.writeString(contact);
+        dest.writeTypedList(offenses);
     }
 }

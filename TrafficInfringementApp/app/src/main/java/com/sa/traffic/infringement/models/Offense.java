@@ -1,6 +1,9 @@
 package com.sa.traffic.infringement.models;
 
-public class Offense {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Offense implements Parcelable {
     private String type;
     private String date;
     private String location;
@@ -14,6 +17,26 @@ public class Offense {
         this.amount = amount;
         this.status = status;
     }
+
+    protected Offense(Parcel in) {
+        type = in.readString();
+        date = in.readString();
+        location = in.readString();
+        amount = in.readDouble();
+        status = in.readString();
+    }
+
+    public static final Creator<Offense> CREATOR = new Creator<Offense>() {
+        @Override
+        public Offense createFromParcel(Parcel in) {
+            return new Offense(in);
+        }
+
+        @Override
+        public Offense[] newArray(int size) {
+            return new Offense[size];
+        }
+    };
 
     public String getType() {
         return type;
@@ -53,5 +76,19 @@ public class Offense {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(type);
+        dest.writeString(date);
+        dest.writeString(location);
+        dest.writeDouble(amount);
+        dest.writeString(status);
     }
 }

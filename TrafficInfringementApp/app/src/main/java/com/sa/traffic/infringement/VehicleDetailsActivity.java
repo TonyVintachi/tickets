@@ -5,8 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.sa.traffic.infringement.models.Vehicle;
 
 public class VehicleDetailsActivity extends AppCompatActivity {
 
@@ -14,6 +13,7 @@ public class VehicleDetailsActivity extends AppCompatActivity {
     private TextView textViewVehicleModel;
     private TextView textViewVehicleReg;
     private TextView textViewVehicleOwner;
+    // private TextView textViewVehicleStatus; // Uncomment if added to layout
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,37 +24,27 @@ public class VehicleDetailsActivity extends AppCompatActivity {
         textViewVehicleModel = findViewById(R.id.textViewVehicleModel);
         textViewVehicleReg = findViewById(R.id.textViewVehicleReg);
         textViewVehicleOwner = findViewById(R.id.textViewVehicleOwner);
+        // textViewVehicleStatus = findViewById(R.id.textViewVehicleStatus); // Uncomment if added to layout
 
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("VEHICLE_DATA")) {
-            String vehicleDataJson = intent.getStringExtra("VEHICLE_DATA");
-            if (vehicleDataJson != null) {
-                try {
-                    // Mock vehicle JSON structure:
-                    // {"make": "Toyota", "model": "Corolla", "registration": "CA 123-456", "ownerName": "Jane Doe"}
-                    JSONObject jsonObject = new JSONObject(vehicleDataJson);
-
-                    String make = jsonObject.optString("make", "N/A");
-                    String model = jsonObject.optString("model", "N/A");
-                    String registration = jsonObject.optString("registration", "N/A");
-                    String ownerName = jsonObject.optString("ownerName", "N/A");
-
-                    textViewVehicleMake.setText(make);
-                    textViewVehicleModel.setText(model);
-                    textViewVehicleReg.setText(registration);
-                    textViewVehicleOwner.setText(ownerName);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(this, "Error parsing vehicle data", Toast.LENGTH_SHORT).show();
-                    setFieldsToNoData();
-                }
+        if (intent != null && intent.hasExtra("VEHICLE_OBJECT")) {
+            Vehicle vehicle = intent.getParcelableExtra("VEHICLE_OBJECT");
+            if (vehicle != null) {
+                textViewVehicleMake.setText(vehicle.getMake() != null ? vehicle.getMake() : "N/A");
+                textViewVehicleModel.setText(vehicle.getModel() != null ? vehicle.getModel() : "N/A");
+                textViewVehicleReg.setText(vehicle.getRegistrationNumber() != null ? vehicle.getRegistrationNumber() : "N/A");
+                textViewVehicleOwner.setText(vehicle.getOwnerName() != null ? vehicle.getOwnerName() : "N/A");
+                // if (textViewVehicleStatus != null && vehicle.getStatus() != null) { // Uncomment if layout is updated
+                //    textViewVehicleStatus.setText(vehicle.getStatus());
+                // } else if (textViewVehicleStatus != null) {
+                //    textViewVehicleStatus.setText("N/A");
+                // }
             } else {
-                Toast.makeText(this, "No vehicle data received", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "No vehicle object received", Toast.LENGTH_SHORT).show();
                 setFieldsToNoData();
             }
         } else {
-            Toast.makeText(this, "No vehicle data passed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No vehicle object passed", Toast.LENGTH_SHORT).show();
             setFieldsToNoData();
         }
     }
