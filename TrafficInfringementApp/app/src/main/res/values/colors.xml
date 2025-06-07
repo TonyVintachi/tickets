@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Colors -->
+    <color name="colorPrimary">#2196F3</color> <!-- Blue 500 -->
+    <color name="colorPrimaryDark">#1976D2</color> <!-- Blue 700 -->
+    <color name="colorAccent">#FF9800</color> <!-- Orange 500 -->
+
+    <!-- Text Colors -->
+    <color name="textColorPrimary">#212121</color> <!-- Grey 900 -->
+    <color name="textColorSecondary">#757575</color> <!-- Grey 600 -->
+    <color name="textColorOnPrimary">#FFFFFF</color> <!-- White for text on primary color -->
+    <color name="textColorOnAccent">#FFFFFF</color> <!-- White for text on accent color -->
+
+
+    <!-- Window and Background Colors -->
+    <color name="windowBackground">#F5F5F5</color> <!-- Grey 100 -->
+    <color name="cardBackground">#FFFFFF</color> <!-- White for cards or distinct sections -->
+
+    <!-- Standard Colors (can be useful) -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red_500">#F44336</color>
+    <color name="green_500">#4CAF50</color>
+</resources>

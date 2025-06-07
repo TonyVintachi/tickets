@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".DriverDetailsActivity"> <!-- Assuming a DriverDetailsActivity -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/textViewDriverNameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewDriverName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            tools:text="John Doe" />
+
+        <TextView
+            android:id="@+id/textViewDriverIdLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID Number:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewDriverId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            tools:text="1234567890123" />
+
+        <TextView
+            android:id="@+id/textViewDriverContactLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewDriverContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            tools:text="0821234567" />
+
+        <TextView
+            android:id="@+id/textViewDriverOffensesLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Outstanding Offenses:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewDriverOffenses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Speeding ticket (2023-10-26)" />
+            <!-- This could later be a RecyclerView -->
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
